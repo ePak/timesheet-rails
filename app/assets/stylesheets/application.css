@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+
+//= require react-datepicker.min
+
+.timelog-date {
+  display: inline-block;
+}
+
+.timelog > * {
+  margin: 1em;
+}
+
