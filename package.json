@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "timesheet-react-webpack-rails",
   "dependencies": {
+    "alt": "^0.16.10",
     "moment": "^2.10.3",
     "react": "^0.13.3",
     "react-datepicker": "^0.8.0"
