@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get       'jira_sessions/authorize' => 'jira_sessions#authorize', as: 'authorize_jira_session'
   resources :jira_sessions, only: [:new, :destroy]
 
+  get       '/api/timelogs', to: 'timesheet#timelogs'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
