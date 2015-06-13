@@ -1,5 +1,5 @@
 import React from 'react';
-import TimeLog from './timelog';
+import TimeLog from './TimeLog';
 
 export default class Timesheet extends React.Component {
   render() {

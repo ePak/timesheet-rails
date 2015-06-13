@@ -15,7 +15,7 @@ module.exports = {
       'webpack-dev-server/client?http://localhost:8080/javascripts/',
       'webpack/hot/only-dev-server',
       //'./app'
-      './scripts/app'
+      './scripts/App'
     ]
   },
  
