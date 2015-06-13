@@ -5,3 +5,17 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+require 'date'
+require 'time_log'
+
+TimeLog.create(date: Date.today - 4, name: 'admin', key: 'DEMO-1', hours: '8')
+TimeLog.create(date: Date.today - 3, name: 'admin', key: 'DEMO-1', hours: '6')
+TimeLog.create(date: Date.today - 3, name: 'admin', key: 'DEMO-2', hours: '2')
+TimeLog.create(date: Date.today - 2, name: 'admin', key: 'DEMO-1', hours: '3')
+TimeLog.create(date: Date.today - 2, name: 'admin', key: 'DEMO-3', hours: '5')
+TimeLog.create(date: Date.today - 1, name: 'admin', key: 'DEMO-6', hours: '8')
+TimeLog.create(date: Date.today, name: 'admin', key: 'DEMO-5', hours: '3')
+
+
+

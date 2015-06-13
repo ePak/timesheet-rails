@@ -1,4 +1,4 @@
 import React from 'react';
-import Test from './test';
+import Timesheet from './timesheet';
 
-React.render(<Test/>, document.getElementById('content'));
+React.render(<Timesheet/>, document.getElementById('app'));
