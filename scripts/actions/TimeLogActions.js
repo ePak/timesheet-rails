@@ -13,6 +13,18 @@ class TimeLogActions {
   resetTimeLog(payload) {
     this.dispatch(payload);
   }
+
+  //This is from ALT tutorial.
+  fetchTimeLogs() {
+    this.dispatch();
+    TimeLogsFetcher.fetch()
+      .then((timeLogs) => {updateTimeLog(timeLogs);}) //ckk: should this be updateTimeLog or ..Logs
+      .catch((errorMessage) => {this.actions.timeLogsFailed(errorMessage)});
+  }
+
+  timeLogsFailed(errorMessage) {
+    this.dispatch(errorMessage);
+  }
 }
 
 export default alt.createActions(TimeLogActions);
