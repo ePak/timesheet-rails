@@ -1,6 +1,9 @@
 import React from 'react';
 import TimeLog from './TimeLog';
+import WeeklyLogs from './WeeklyLogs';
 import TimeLogStore from '../stores/TimeLogStore';
+import moment from 'moment';
+import R from 'ramda';
 
 export default class Timesheet extends React.Component {
   constructor(props) {
@@ -20,22 +23,43 @@ export default class Timesheet extends React.Component {
     this.setState(log);
   }
 
+  partitionBy(fn) {
+    let key, arr;
+    return function(list) {
+      
+    };
+  }
+
   render() {
-    let timeLogs = this.state.timelogs.map( log => {
-      return (
-          <TimeLog
-            key= { log.id }
-            id={ log.id }
-            date={ log.date }
-            jiraKey={ log.key }
-            hours={ log.hours } />
-      );
-    });
+    let weekKey = function(someDate) {
+      return `${someDate.isoWeekYear()}-${someDate.isoWeek()}`;
+    }
+    let logsByWeek = R.groupBy(R.compose(weekKey, log => { return moment(log.date) }),
+                               this.state.timelogs);
+    /*
+    let sortedWeeks = R.compose(R.sort((a,b) => b > a), R.keys)(logsByWeek);
+    let weeklyLogs = R.map(week => (
+      <WeeklyLogs
+        key={ week }
+        logs={ logsByWeek[week] }/>),
+        sortedWeeks);
+    */
+
+    let weeklyLogs = R.compose(
+      R.map(week => (
+        <WeeklyLogs
+          key={ week }
+          logs={ logsByWeek[week] }/>)
+      ),
+      R.sort((a, b) => b > a),
+      R.keys)
+      (logsByWeek);
+
     return (
       <div className="timesheet">
         <div className="header">Timesheet</div>
         <div className="content">
-          { timeLogs }
+          { weeklyLogs }
         </div>
       </div>
     );

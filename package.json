@@ -5,6 +5,7 @@
   "dependencies": {
     "alt": "^0.16.10",
     "moment": "^2.10.3",
+    "ramda": "^0.14.0",
     "react": "^0.13.3",
     "react-datepicker": "^0.8.0"
   },

@@ -31,7 +31,7 @@ export default class TimeLog extends React.Component {
       keyField = (<input value={ log.jiraKey } />);
       hoursField = (<input value={ log.hours } />);
     } else {
-      dateField = date ? date.format(dateFormat) : "";
+      dateField = date ? date.format("ddd, Do") : "";
       keyField = log.jiraKey;
       hoursField = log.hours;
     }
