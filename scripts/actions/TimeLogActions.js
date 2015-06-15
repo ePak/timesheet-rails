@@ -1,8 +1,17 @@
 import alt from '../alt';
 
 class TimeLogActions {
-  addTimeLog(log) {
-    this.dispatch(log);
+  addTimeLog(payload) {
+    this.dispatch(payload);
+  }
+  updateTimeLog(payload) {
+    this.dispatch(payload);
+  }
+  editTimeLog(payload) {
+    this.dispatch(payload);
+  }
+  resetTimeLog(payload) {
+    this.dispatch(payload);
   }
 }
 

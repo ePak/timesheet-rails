@@ -41,7 +41,17 @@ module.exports = {
       test: /\.jsx?$/,
       loaders: ['react-hot', 'jsx-loader', 'babel?optional=runtime'],
       include: path.join(__dirname, 'scripts')
-    } ]
+    }, {
+      test: /moment\.js$/,
+      loader: 'expose?moment'
+    }, {
+      test: /immutable\.js$/,
+      loader: 'expose?Immutable'
+    }, {
+      test: /ramda\.js$/,
+      loader: 'expose?R'
+    }
+    ]
   }
  
 };

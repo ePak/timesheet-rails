@@ -1,14 +1,22 @@
 import React from 'react';
+import AddTimeLog from './AddTimeLog';
 import TimeLog from './TimeLog';
 import WeeklyLogs from './WeeklyLogs';
 import TimeLogStore from '../stores/TimeLogStore';
 import moment from 'moment';
 import R from 'ramda';
+import Immutable from 'immutable';
 
 export default class Timesheet extends React.Component {
   constructor(props) {
     super(props);
-    this.state = TimeLogStore.getState();
+
+    const storeState = TimeLogStore.getState();
+    this.state = {
+      logs: storeState.getLogs(),
+      newLog: storeState.newLog
+    };
+    console.log(this.state);
   }
 
   componentDidMount() {
@@ -19,8 +27,12 @@ export default class Timesheet extends React.Component {
     TimeLogStore.unlisten(this.onChange.bind(this));
   }
 
-  onChange(logs) {
-    this.setState(log);
+  onChange(store) {
+    let logs = store.getLogs();
+    this.setState({
+      logs: store.getLogs(),
+      newLog: store.newLog
+    });
   }
 
   partitionBy(fn) {
@@ -32,33 +44,29 @@ export default class Timesheet extends React.Component {
 
   render() {
     let weekKey = function(someDate) {
-      return `${someDate.isoWeekYear()}-${someDate.isoWeek()}`;
+      return ;
     }
-    let logsByWeek = R.groupBy(R.compose(weekKey, log => { return moment(log.date) }),
-                               this.state.timelogs);
-    /*
-    let sortedWeeks = R.compose(R.sort((a,b) => b > a), R.keys)(logsByWeek);
-    let weeklyLogs = R.map(week => (
-      <WeeklyLogs
-        key={ week }
-        logs={ logsByWeek[week] }/>),
-        sortedWeeks);
-    */
+    let logsByWeek = R.groupBy(R.compose(date => `${date.isoWeekYear()}-${date.isoWeek()}`,
+                                         log => moment(log.get('date')) ),
+                               this.state.logs);
 
     let weeklyLogs = R.compose(
-      R.map(week => (
+      R.map(wk => (
         <WeeklyLogs
-          key={ week }
-          logs={ logsByWeek[week] }/>)
+          key={ wk }
+          logs={ logsByWeek.get(wk) }/>)
       ),
-      R.sort((a, b) => b > a),
-      R.keys)
-      (logsByWeek);
+      R.sort((a, b) => b > a))
+      (logsByWeek.keySeq().toJS());
 
     return (
       <div className="timesheet">
-        <div className="header">Timesheet</div>
+        <div className="header">
+          <div>Add new log:</div>
+          <AddTimeLog log={ this.state.newLog } />
+        </div>
         <div className="content">
+          <hr/>
           { weeklyLogs }
         </div>
       </div>

@@ -2,32 +2,27 @@ import React from 'react';
 import TimeLog from './TimeLog';
 import R from 'ramda';
 import WeeklyLogsHeader from './WeeklyLogsHeader';
+import Immutable from 'immutable';
 
 export default class WeeklyLogs extends React.Component {
   render() {
-    var timelogs = R.reduce(
-      (acc, log) => {
-        acc.total += log.hours
-        acc.elements.push(
-          <TimeLog
-            key= { log.id }
-            id={ log.id }
-            date={ log.date }
-            jiraKey={ log.key }
-            hours={ log.hours } />);
-        return acc;},
-      { total: 0, elements: [] },
+    let total = 0;
+    let timelogs = R.map(
+      log => {
+        total += log.get('hours');
+        return (<TimeLog key={ log.get('id') } log={ log } />)
+      },
       this.props.logs);
 
     return (
       <div className="weeklylogs">
-        <WeeklyLogsHeader total={ timelogs.total } date={ this.props.logs[0].date } />
-        { timelogs.elements }
+        <WeeklyLogsHeader total={ total } date={ this.props.logs.getIn([0, 'date']) } />
+        { timelogs }
       </div>);
   }
 }
 
 
 WeeklyLogs.propTypes = {
-  logs: React.PropTypes.array.isRequired
+  logs: React.PropTypes.object.isRequired
 }
