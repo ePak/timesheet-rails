@@ -31,8 +31,26 @@ class ApplicationController < ActionController::Base
     if session[:jira_auth]
       @jira_client.set_access_token(
         session[:jira_auth]["access_token"],
-        session[:jira_auth]["access_key"]
-      )
+        session[:jira_auth]["access_key"])
+      get_current_session if !session[:user_key]
+    end
+  end
+
+  def get_current_session
+    begin
+      puts "********** get_current_session *************"
+      response = @jira_client.get("/rest/auth/1/session")
+      json = JSON.parse response.body
+      res = @jira_client.get(@jira_client.options[:rest_base_path] + "/user?key=#{json["name"]}&expand=groups")
+      userJson =  JSON.parse res.body
+      session[:user_key] = userJson["key"]
+
+      user = @jira_client.User.find(session[:user_key])
+      session[:display_name] = user.displayName
+
+      team_index = userJson['groups']['items'].find_index { |group| group['name'].start_with? "Team " }
+      session[:team] = team_index ? userJson['groups']['items'][team_index]['name'] : ""
+    rescue JIRA::HTTPError => e
     end
   end
 end

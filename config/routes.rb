@@ -6,6 +6,12 @@ Rails.application.routes.draw do
   resources :jira_sessions, only: [:new, :destroy]
 
   get       '/api/timelogs', to: 'timesheet#timelogs'
+  get       '/api/issue/my', to: 'jira_api#issue_assigned_to_me_json'
+  get       '/api/issue/my_team', to: 'jira_api#issue_assigned_to_my_team_json'
+  get       '/api/issue/last_viewed', to: 'jira_api#issue_last_viewed_json'
+  get       '/api/issue/admin', to: 'jira_api#issue_admin_json'
+  get       '/api/issue/my_testing', to: 'jira_api#issue_my_testing_json'
+  get       '/api/issue/search', to: 'jira_api#search_issue'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
