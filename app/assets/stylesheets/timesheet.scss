@@ -1,3 +1,165 @@
 // Place all the styles related to the timesheet controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.datepicker__input {
+  font-size: inherit;
+  box-shadow: none;
+}
+
+input:focus {
+  outline: none;
+  border-color: #aeaeae;
+  box-shadow: inset 0 2px 2px #e9e9e9,0 0 10px 0 rgba(73,107,125,0.3);
+}
+
+button {
+  color: white;
+  *text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background: rgb(66, 184, 221); /* this is a light blue */
+}
+
+button[disabled] {
+  opacity: 0.3;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.weeklylogs {
+  margin-bottom: 1em;
+}
+
+.timelog,
+.weeklyLogsHeader {
+  margin: 0.3em 0.5em;
+}
+
+.weeklyLogsHeader {
+  background-color: #eee;
+  margin-bottom: 0.75em;
+}
+
+.weeklyLogsHeader > [class *= "pure-u"],
+.timelog > [class *= "pure-u"] {
+  padding: 0 0.4em;
+}
+
+
+.timelog input,
+.timelog button,
+.timelog .text,
+.weeklyLogsHeader .text {
+  display: inline-block;
+  min-width: 1px;
+  width: 100%;
+  line-height: 1.5em;
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+  border: 1px solid #aeaeae;
+}
+
+.timelog button {
+  border-color: rgb(66, 184, 221);
+}
+
+
+/*
+.timelog input,
+.timelog button {
+  box-shadow: inset 0 2px 2px #e9e9e9;
+}
+*/
+
+.timelog .text,
+.weeklyLogsHeader .text {
+  border-color: transparent;
+}
+
+.timelog-hours > :first-child,
+.totalHours > :first-child {
+  padding-right: 0.2em;
+  text-align: right;
+}
+
+.timelog-hours input {
+  text-align: right;
+}
+
+.timelog-hours > :not(:first-child),
+.totalHours > :not(:first-child) {
+  line-height: 1.5em;
+  padding: 0.2em 0;
+}
+
+/*
+.weeklylogs {
+  margin-bottom: 1em;
+}
+
+.weeklyLogsHeader {
+  background-color: #eee;
+}
+
+.dateRange,
+.totalHours {
+  display: inline-block;
+  margin: 1%;
+  width: 10%;
+}
+
+.dateRange {
+  width: 62%;  
+}
+
+.timelog-date {
+  display: inline-block;
+}
+
+.timelog {
+  padding: 0.5em 0;
+  *height: 2.5em;
+}
+
+.timelog > * {
+  display: inline-block;
+  margin: 0 1%;
+  width: 10%
+}
+
+
+.timelog-date {
+  width: 20%;
+}
+
+.timelog-key {
+  width: 40%
+}
+
+.timelog-date input,
+.timelog-key input,
+.timelog-hours input {
+  min-width: 1px;
+  width: 100%
+}
+
+.timelog-hours input {
+  width: 3em;
+  text-align: right;
+}
+
+.timelog-leftButton > *,
+.timelog-rightButton > * {
+  width: 100%;
+}
+
+.totalHours,
+.timelog-hours {
+  text-align: right;
+}
+*/
+
+

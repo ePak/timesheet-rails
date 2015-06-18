@@ -100,9 +100,9 @@ export default class TimeLog extends React.Component {
         </button>);
       rightButton = (<button className="timelog-cancel" onClick={ this.onCancelClick.bind(this) }>Cancel</button>);
     } else {
-      dateField = date ? date.format("ddd, Do") : "";
-      keyField = jiraKey;
-      hoursField = hours;
+      dateField = (<span className="text">{ date ? date.format("ddd, Do") : "" }</span>);
+      keyField = (<span className="text">{ jiraKey }</span>);
+      hoursField = (<span className="text">{ hours }</span>);
       leftButton = this.state.isHovering
         ? (<button className="timelog-edit" onClick={ this.onEditClick.bind(this) }>Edit</button>)
         : null;
@@ -110,14 +110,16 @@ export default class TimeLog extends React.Component {
     }
 
     return (
-      <div className="timelog" 
+      <div className={ "timelog pure-g " + (this.state.isEditing ? "editing" : "") } 
         onMouseEnter={ this.onLogMouseEnter.bind(this) }
         onMouseLeave={ this.onLogMouseLeave.bind(this) } >
-        <div className="timelog-date">{ dateField }</div>
-        <div className="timelog-key">{ keyField }</div>
-        <div className="timelog-hours">{ hoursField } hrs</div>
-        <div className="timelog-leftButton">{ leftButton }</div>
-        <div className="timelog-rightButton">{ rightButton }</div>
+        <div className="timelog-date pure-u-1-6">{ dateField }</div>
+        <div className="timelog-key pure-u-7-12">{ keyField }</div>
+        <div className="timelog-hours pure-u-1-12 pure-g">
+          <span className="pure-u-3-4">{ hoursField }</span>
+          <span className="pure-u-1-4">hrs</span></div>
+        <div className="timelog-leftButton pure-u-1-12">{ leftButton }</div>
+        <div className="timelog-rightButton pure-u-1-12">{ rightButton }</div>
       </div>
     );
   }

@@ -10,81 +10,12 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
+ *= require purecss/base
+ *= require purecss/grids
+ *= require purecss/buttons
+ //= require react-datepicker.min
  *= require_self
+ *= require timesheet
  */
-
-//= require react-datepicker.min
-
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-.weeklylogs {
-  margin-bottom: 1em;
-}
-
-.weeklyLogsHeader {
-  background-color: #eee;
-}
-
-.dateRange,
-.totalHours {
-  display: inline-block;
-  margin: 1%;
-  width: 10%;
-}
-
-.dateRange {
-  width: 62%;  
-}
-
-.timelog-date {
-  display: inline-block;
-}
-
-.timelog {
-  padding: 0.5em 0;
-  *height: 2.5em;
-}
-
-.timelog > * {
-  display: inline-block;
-  margin: 0 1%;
-  width: 10%
-}
-
-
-.timelog-date {
-  width: 20%;
-}
-
-.timelog-key {
-  width: 40%
-}
-
-.timelog-date input,
-.timelog-key input,
-.timelog-hours input {
-  min-width: 1px;
-  width: 100%
-}
-
-.timelog-hours input {
-  width: 3em;
-  text-align: right;
-}
-
-.timelog-leftButton > *,
-.timelog-rightButton > * {
-  width: 100%;
-}
-
-.totalHours,
-.timelog-hours {
-  text-align: right;
-}
 
 
