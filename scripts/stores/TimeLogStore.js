@@ -50,9 +50,14 @@ class TimeLogStore {
 
   handleAddTimeLog(log) {
     log.id = this.keyGen++;
-    this.timelogs = R.compose(R.sort((a, b) => b.date > a.date),
-                              R.append(log))
-                              (this.timelogs);
+    // this.timelogs = R.compose(R.sort((a, b) => b.date > a.date),
+                              // R.append(log))
+                              // (this.timelogs);
+    //TODO: Sort the logs by date.
+    console.log(this.timelogs);
+    this.timelogs = this.timelogs.push(log);
+    //this.timelogs = R.append(log, this.timelogs);
+    //this.timelogs = R.sort(((a, b) => b.date > a.date), this.timelogs);
   }
 
   handleUpdateTimeLog(payload) {
@@ -68,7 +73,6 @@ class TimeLogStore {
       return;
     }
 
-    console.log('test');
     const log = this.timelogs.find( log => log.get('id') === id );
     this.dirty = log.equals(payload.delete('dirty')) 
       ? this.dirty.delete(id)
