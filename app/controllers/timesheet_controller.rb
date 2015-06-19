@@ -9,7 +9,7 @@ class TimesheetController < ApplicationController
   end
 
   def timelogs
-    render :json => TimeLog.take(10).to_json(:only => [:id, :date, :name, :hours, :key])
+    render :json => TimeLog.take(10).to_json(:only => [:date, :name, :hours])
   end
 
 end

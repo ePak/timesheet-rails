@@ -20,9 +20,7 @@ export default class Timesheet extends React.Component {
   }
 
   componentDidMount() {
-    // TimeLogStore.listen(this.onChange.bind(this));
-    TimeLogStore.listen(this.onChange);
-    TimeLogActions.fetchTimeLogs();
+    TimeLogStore.listen(this.onChange.bind(this));
   }
 
   componentDidUnmound() {
