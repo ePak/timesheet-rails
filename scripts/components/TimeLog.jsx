@@ -30,6 +30,7 @@ export default class TimeLog extends React.Component {
     e.stopPropagation();
     e.preventDefault();
     TimeLogActions.updateTimeLog( this.props.log );
+    this.setState({ isEditing: false });
   }
 
   onCancelClick(e) {
