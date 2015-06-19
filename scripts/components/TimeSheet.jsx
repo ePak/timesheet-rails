@@ -16,14 +16,13 @@ export default class Timesheet extends React.Component {
       logs: storeState.getLogs(),
       newLog: storeState.newLog
     };
-    console.log(this.state);
   }
 
   componentDidMount() {
     TimeLogStore.listen(this.onChange.bind(this));
   }
 
-  componentDidUnmound() {
+  componentDidUnmount() {
     TimeLogStore.unlisten(this.onChange.bind(this));
   }
 

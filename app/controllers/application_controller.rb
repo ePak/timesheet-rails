@@ -39,8 +39,9 @@ class ApplicationController < ActionController::Base
   def get_current_session
     begin
       puts "********** get_current_session *************"
-      response = @jira_client.get("/rest/auth/1/session")
-      json = JSON.parse response.body
+      context_path = @jira_client.options[:context_path]
+      res = @jira_client.get("#{context_path}/rest/auth/1/session")
+      json = JSON.parse res.body
       res = @jira_client.get(@jira_client.options[:rest_base_path] + "/user?key=#{json["name"]}&expand=groups")
       userJson =  JSON.parse res.body
       session[:user_key] = userJson["key"]
@@ -50,7 +51,10 @@ class ApplicationController < ActionController::Base
 
       team_index = userJson['groups']['items'].find_index { |group| group['name'].start_with? "Team " }
       session[:team] = team_index ? userJson['groups']['items'][team_index]['name'] : ""
+
+      puts "********** end  *************"
     rescue JIRA::HTTPError => e
+      puts e.message
     end
   end
 end

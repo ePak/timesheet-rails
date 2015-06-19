@@ -1,8 +1,10 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
+import IssueField from './IssueField';
 import moment from 'moment';
 import TimeLogActions from '../actions/TimeLogActions';
 import R from 'ramda';
+
 
 const displayFormat = 'ddd, Do MMM YY';
 
@@ -45,10 +47,8 @@ export default class TimeLog extends React.Component {
     TimeLogActions.editTimeLog( this.props.log.set('date', dateStr) );
   }
 
-  onJiraKeyChange(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    TimeLogActions.editTimeLog(this.props.log.set('key', e.target.value));
+  onJiraKeyChange(newKey) {
+    TimeLogActions.editTimeLog(this.props.log.set('key', newKey));
   }
 
   isNumber(n) {
@@ -83,6 +83,11 @@ export default class TimeLog extends React.Component {
     const jiraKey = log.get('key');
     const hours = log.get('hours');
 
+    keyField = (
+      <IssueField
+        term={jiraKey}
+        isEditing={ this.state.isEditing }
+        onChange={ this.onJiraKeyChange.bind(this) } />);
     if (this.state.isEditing) {
       dateField = (
         <DatePicker 
@@ -90,7 +95,6 @@ export default class TimeLog extends React.Component {
           onChange={ this.onDateChange.bind(this) } 
           dateFormat={ displayFormat } 
           weekStart={ 0 }/>); // calendar doesn't seem to behave correctly with 1
-      keyField = (<input value={ jiraKey } onChange={ this.onJiraKeyChange.bind(this) }/>);
       hoursField = (<input value={ hours } onChange={ this.onHoursChange.bind(this) }/>);
       leftButton = (
         <button 
@@ -102,7 +106,6 @@ export default class TimeLog extends React.Component {
       rightButton = (<button className="timelog-cancel" onClick={ this.onCancelClick.bind(this) }>Cancel</button>);
     } else {
       dateField = (<span className="text">{ date ? date.format("ddd, Do") : "" }</span>);
-      keyField = (<span className="text">{ jiraKey }</span>);
       hoursField = (<span className="text">{ hours }</span>);
       leftButton = this.state.isHovering
         ? (<button className="timelog-edit" onClick={ this.onEditClick.bind(this) }>Edit</button>)
@@ -115,7 +118,7 @@ export default class TimeLog extends React.Component {
         onMouseEnter={ this.onLogMouseEnter.bind(this) }
         onMouseLeave={ this.onLogMouseLeave.bind(this) } >
         <div className="timelog-date pure-u-1-6">{ dateField }</div>
-        <div className="timelog-key pure-u-7-12">{ keyField }</div>
+        <IssueField className="timelog-key pure-u-7-12" term={jiraKey} isEditing={ this.state.isEditing } onChange={ this.onJiraKeyChange.bind(this) }/>
         <div className="timelog-hours pure-u-1-12 pure-g">
           <span className="pure-u-3-4">{ hoursField }</span>
           <span className="pure-u-1-4">hrs</span></div>
