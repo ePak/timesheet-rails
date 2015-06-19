@@ -81,7 +81,7 @@ class TimeLogStore {
       return;
     }
 
-    this.dirty.delete(payload.get('id'));
+    this.dirty = this.dirty.delete(payload.get('id'));
   }
 
 }
